@@ -1,25 +1,73 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import { Route, Routes } from "react-router-dom";
+import Aos from "aos";
+import { useEffect, useState } from "react";
+import "aos/dist/aos.css";
+import "aos/dist/aos.js";
+
+import Home from "./Components/Pages/Home/Home";
+import Nav from "./Components/Nav/Nav";
+import Landing from "./Components/Landing/Landing";
+import Footer from "./Components/Footer/Footer";
+import SignUpAndLoginPage from "./Components/Login_Signup/Login_Signup";
+import AboutPage from "./Components/Pages/About/About";
+import Services from "./Components/Services/Services";
+import ServicesPage from "./Components/Services/ServicesPage/ServicesPage";
+import DoctorsPage from "./Components/Pages/OurTeam/OurTeam";
+import OurTeam from "./Components/OurTeam/OurTeam";
+import PostCard from "./Components/PostCard/PostCard";
+import PostsPage from "./Components/Pages/PostPage/PostPage";
+import FormPage from "./Components/Pages/FormPage/FormPage";
+import Patient from "./Components/Pages/Patient/Patient";
+import { AuthProvider } from "./Components/Auth/Auth";
+import ContactUs from "./Components/Pages/Contact Us/ContactUS";
+import EditProfilePage from "./Components/Pages/Profile/EditProfile";
+import Profile from "./Components/Pages/Profile/Profile";
+import FAQPage from "./Components/Pages/FAQ/FAQ";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+ 
+
+    // Animation
+    useEffect(() => {
+        Aos.init({
+            startEvent: "load",
+            offset: 100,
+            duration: 600,
+            easing: "ease-in-sine",
+            delay: 100,
+        });
+        Aos.refresh();
+    }, []);
+
+    return (
+      
+            <div id="body" className="font-contentFont">
+                <Nav />
+                {/* <FAQPage/> */}
+                <Routes>
+                    <Route path="/" element={<Home />} />{" "}
+                    <Route path="signIn" element={<SignUpAndLoginPage  />} />{" "}
+                    <Route path="about" element={<AboutPage />} />{" "}
+                    <Route path="services" element={<ServicesPage />} />{" "}
+                    <Route path="team" element={<OurTeam showFooter={false} />} />{" "}
+                    <Route path="form" element={<FormPage />} />{" "}
+                    <Route path="patient" element={<Patient  />} />
+                    <Route path="blog" element={<PostsPage showNav={true} />} />
+                    <Route path='contact' element={<ContactUs />} />
+                    <Route path='profile' element={<Profile />} />
+                    <Route path='faq' element={<FAQPage showFooter={true} showBanner={true} />} />
+
+
+                    <Route path='editprofile' element={<EditProfilePage />} />
+
+
+                </Routes>{" "}
+            </div>
+        
+    );
 }
 
 export default App;
